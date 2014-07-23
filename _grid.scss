@@ -1,0 +1,80 @@
+// Settings
+$columns: 12; // Number of columns.
+$gutter: 1; // % to use as gutter size.
+$gridClass: "grid"; // Class to use for the grid.
+$gutterless: true; // Option to add a gutterless grid as well as guttered.
+$gutterlessClass: "no-gutter"; // Class to use for gutterless grid.
+
+// Breakpoint settings.
+$breakpoints: (
+	'small' '(min-width: 390px) and (max-width: 599px)',
+	'medium' '(min-width: 600px) and (max-width: 999px)',
+	'large' '(min-width: 1000px)'
+);
+
+// DO NOT EDIT ANYTHING BELOW THIS LINE.
+
+// Mixin to build the grid.
+@mixin buildGrid($gutter) {
+	
+	@for $i from 1 through $columns {
+		@for $c from 1 through $i {
+			.span-#{$c}-of-#{$i} {
+				$totalGutters: $gutter * ($i - 1);
+				$singleUnitWidth: (100 - $totalGutters) / $i;
+				$width: ($singleUnitWidth * $c) + ($gutter * ($c - 1));
+				width: $width * 1%;
+			}
+		}
+	}
+	
+	@each $breakpoint in $breakpoints {
+		$name: nth($breakpoint, 1);
+		$declaration: nth($breakpoint, 2);
+		
+		@media only screen and #{$declaration} {
+			@for $i from 1 through $columns {
+				@for $c from 1 through $i {
+					.#{$name}-span-#{$c}-of-#{$i} {
+						$totalGutters: $gutter * ($i - 1);
+						$singleUnitWidth: (100 - $totalGutters) / $i;
+						$width: ($singleUnitWidth * $c) + ($gutter * ($c - 1));
+						width: $width * 1%;
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+.#{$gridClass} {
+	&:before, &:after {
+		content: " ";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+	.grid-col {
+		display: block;
+		float: left;
+		margin: 0;
+		margin-left: $gutter * 1%;
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+
+	@include buildGrid($gutter); // Build the grid, with gutters.
+	
+	// Gutterless grid.
+	@if ($gutterless and ($gutter != 0)) {
+		&.#{$gutterlessClass} {
+			.grid-col {
+				margin-left: 0;
+			}
+			@include buildGrid(0);
+		}
+	}
+}

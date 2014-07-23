@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Responsive grid</title>
+		<style>
+			@import url("grid.css"); /* Import grid css */
+			* { box-sizing: border-box; }
+			.grid-col { background-color: #eee; border: 1px solid #ccc; padding: 1em; }
+			code { display: inline-block; background-color: #efefef; border: 1px solid #ececec; padding: 1em;}
+		</style>
+	</head>
+	<body>
+		<h1>Responsive grid demo.</h1>
+		<p>Build grids by using classes to describe how wide a column should span.</p>
+		<strong>Customise column and gutter/margin settings in the scss before compiling to get your grid how you want it.</strong>
+		<p>Note: This demo page is using a compiled version of the scss, using upto a 12 column grid with 1% gutters.</p>
+		
+		<h2>6 column grid</h2>
+		<h3>Markup</h3>
+		<code>
+			&lt;div class="grid"&gt;<br>
+				&lt;div class="grid-col span-1-of-6"&gt;1 of 6&lt;/div&gt;<br>
+				&lt;div class="grid-col span-1-of-6"&gt;1 of 6&lt;/div&gt;<br>
+				&lt;div class="grid-col span-1-of-6"&gt;1 of 6&lt;/div&gt;<br>
+				&lt;div class="grid-col span-2-of-6"&gt;2 of 6&lt;/div&gt;<br>
+				&lt;div class="grid-col span-1-of-6"&gt;1 of 6&lt;/div&gt;<br>
+			&lt;/div&gt;
+		</code>
+		
+		<h3>Result</h3>
+		<div class="grid">
+			<div class="grid-col span-1-of-6">1 of 6</div>
+			<div class="grid-col span-1-of-6">1 of 6</div>
+			<div class="grid-col span-1-of-6">1 of 6</div>
+			<div class="grid-col span-2-of-6">2 of 6</div>
+			<div class="grid-col span-1-of-6">1 of 6</div>
+		</div>
+		
+		<h2>10 column, gutterless, grid with breakpoints</h2>
+		<p>When using breakpoints it's best to use a gutterless grid as when the columns break over to a new line the left margin (applied to all columns apart from the 1st) prevents the column from lining in.</p>
+		
+		<p>Pre-fix the class name with a breakpoint name (set in the .scss) to set how to display the column at certain breakpoints.</p>
+		
+		<h3>Markup</h3>
+		<code>
+			&lt;div class="grid no-gutter"&gt;<br>
+				&lt;div class="grid-col span-1-of-10 small-span-1-of-2"&gt;1 of 10 by default, 1 of 2 on small screens&lt;/div&gt;<br>
+				&lt;div class="grid-col span-1-of-10 small-span-1-of-2"&gt;1 of 10 by default, 1 of 2 on small screens&lt;/div&gt;<br>
+				&lt;div class="grid-col span-1-of-10 small-span-2-of-6"&gt;1 of 10 by default, 2 of 6 on small screens&lt;/div&gt;<br>
+				&lt;div class="grid-col span-3-of-10 small-span-1-of-1"&gt;3 of 10 by default, 1 of 1 on small screens&lt;/div&gt;<br>
+				&lt;div class="grid-col span-4-of-10 small-span-1-of-1"&gt;4 of 10 by default, 1 of 1 on small screens&lt;/div&gt;<br>
+			&lt;/div&gt;
+		</code>
+		
+		<h3>Result</h3>
+		<div class="grid no-gutter">
+			<div class="grid-col span-1-of-10 small-span-1-of-2">1 of 10 by default,<br/>1 of 2 on small screens</div>
+			<div class="grid-col span-1-of-10 small-span-1-of-2">1 of 10 by default,<br/>1 of 2 on small screens</div>
+			<div class="grid-col span-1-of-10 small-span-2-of-6">1 of 10 by default,<br/>2 of 6 on small screens</div>
+			<div class="grid-col span-3-of-10 small-span-1-of-1">3 of 10 by default,<br/>1 of 1 on small screens</div>
+			<div class="grid-col span-4-of-10 small-span-1-of-1">4 of 10 by default,<br/>1 of 1 on small screens</div>
+		</div>
+		
+		<h2>Nested grids</h2>
+		<p>Grids can also be nested. All widths are calculated on a percentage basis, so works well when nested.</p>
+		<div class="grid">
+			<div class="grid-col span-4-of-6 small-span-1-of-1">
+				<p>4 of 6</p>
+				<div class="grid">
+					<div class="grid-col span-1-of-2">
+						<p>1 of 2</p>
+					</div>
+					<div class="grid-col span-1-of-2">
+						<p>1 of 2</p>
+					</div>
+				</div>
+			</div>
+			<div class="grid-col span-2-of-6">
+				<p>2 of 6</p>
+			</div>
+		</div>
+		
+	</body>
+</html>
